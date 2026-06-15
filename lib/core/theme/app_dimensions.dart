@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppDimensions {
-  static const EdgeInsets screenPadding = EdgeInsets.all(16);
+  static const EdgeInsets screenPadding = EdgeInsets.fromLTRB(16, 24, 16, 16);
   static const EdgeInsets innerWidgetPadding = EdgeInsets.all(12);
 
   static const double buttonHeight = 52;
@@ -11,9 +11,11 @@ class AppDimensions {
 
   static const double iconSm = 16, iconMd = 24, iconLg = 32;
 
+  static const double spacingSmallest = 4;
   static const double spacingSmall = 8;
   static const double spacingMedium = 16;
   static const double spacingLarge = 24;
+  static const double spacingLargest = 32;
 
   static final BorderRadius borderRadiusSmall = BorderRadius.circular(8);
   static final BorderRadius borderRadiusMedium = BorderRadius.circular(12);

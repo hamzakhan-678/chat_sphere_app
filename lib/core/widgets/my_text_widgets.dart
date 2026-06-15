@@ -36,7 +36,7 @@ class MyTitleText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize ?? 22,
         fontWeight: fontWeight ?? FontWeight.w700,
-        color: color ?? Theme.of(context).colorScheme.onPrimary,
+        color: color ?? Theme.of(context).colorScheme.onSurface,
         letterSpacing: letterSpacing,
         overflow: overflow,
         decoration: decoration,

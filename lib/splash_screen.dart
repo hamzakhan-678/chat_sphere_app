@@ -1,6 +1,7 @@
 import 'package:chat_sphere_app/core/router/app_routes.dart';
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/utils/screen_utils.dart';
+import 'package:chat_sphere_app/core/widgets/logo_widget.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:chat_sphere_app/core/widgets/sized_box_spacers.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset('assets/logo.png', height: 200, width: 200),
+            LogoWidget(),
 
             heightSpace(AppDimensions.spacingMedium),
 
@@ -42,6 +43,13 @@ class _SplashScreenState extends State<SplashScreen> {
             heightSpace(AppDimensions.spacingSmall),
 
             MyBodyText(text: 'Conversations, beautifully connected.'),
+
+            heightSpace(AppDimensions.spacingMedium),
+
+            CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary,
+              strokeWidth: 4,
+            ),
           ],
         ),
       ),
