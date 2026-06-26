@@ -1,3 +1,4 @@
+import 'package:chat_sphere_app/Features/Auth/Controllers/auth_controller.dart';
 import 'package:chat_sphere_app/core/router/app_routes.dart';
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/utils/screen_utils.dart';
@@ -8,6 +9,7 @@ import 'package:chat_sphere_app/core/widgets/my_text_field.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:chat_sphere_app/core/widgets/sized_box_spacers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -20,6 +22,10 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final emailController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  final authController = Get.find<AuthController>();
 
   @override
   void dispose() {
@@ -72,22 +78,51 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
             heightSpace(AppDimensions.spacingLarge),
 
-            MyBodyText(text: 'Email'),
-            heightSpace(AppDimensions.spacingSmallest),
-            MyTextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              hintText: 'you@example.com',
-              prefixIconData: Icons.mail_outline_rounded,
-            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyBodyText(text: 'Email'),
 
-            heightSpace(AppDimensions.spacingLargest),
+                  heightSpace(AppDimensions.spacingSmallest),
+                  MyTextField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    hintText: 'you@example.com',
+                    prefixIconData: Icons.mail_outline_rounded,
+                  ),
 
-            MyButton(
-              onTap: () {
-                context.goNamed(AppRoutes.login);
-              },
-              label: 'Send Reset Link',
+                  heightSpace(AppDimensions.spacingLargest),
+
+                  Obx(
+                    () => MyButton(
+                      onTap: () async {
+                        final success = await authController.forgotPassword(
+                          email: emailController.text.trim(),
+                        );
+                        if (success) {
+                          Get.snackbar(
+                            'Success',
+                            'Password reset link sent to your email.',
+                          );
+
+                          if (!mounted) return;
+
+                          context.goNamed(AppRoutes.login);
+                        } else {
+                          Get.snackbar(
+                            'Error',
+                            'Something went wrong, please try again.',
+                          );
+                        }
+                      },
+                      isLoading: authController.isLoading.value,
+                      label: 'Send Reset Link',
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

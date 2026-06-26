@@ -19,6 +19,7 @@ class _LogoWidgetState extends State<LogoWidget> {
       padding: AppDimensions.innerWidgetPadding,
       height: widget.size,
       width: widget.size,
+      noBorder: true,
       color: Theme.of(context).colorScheme.primary,
       child: Icon(
         LucideIcons.messageCircle,

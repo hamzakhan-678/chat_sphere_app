@@ -9,6 +9,7 @@ class MyContainer extends StatefulWidget {
     this.width,
     this.child,
     this.color,
+    this.noBorder = false,
     this.border,
     this.borderRadius,
     this.decorationImage,
@@ -22,6 +23,7 @@ class MyContainer extends StatefulWidget {
   final double? width;
   final Widget? child;
   final Color? color;
+  final bool noBorder;
   final BoxBorder? border;
   final BorderRadiusGeometry? borderRadius;
   final DecorationImage? decorationImage;
@@ -44,9 +46,10 @@ class _MyContainerState extends State<MyContainer> {
       alignment: widget.alignment,
       decoration: BoxDecoration(
         color: widget.color ?? Theme.of(context).colorScheme.surface,
-        border:
-            widget.border ??
-            Border.all(color: Theme.of(context).colorScheme.outline),
+        border: widget.noBorder
+            ? null
+            : widget.border ??
+                  Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: widget.shape == BoxShape.circle
             ? null
             : widget.borderRadius ?? AppDimensions.borderRadiusMedium,

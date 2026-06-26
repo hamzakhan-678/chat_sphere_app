@@ -1,4 +1,5 @@
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
+import 'package:chat_sphere_app/core/widgets/my_container.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -10,12 +11,16 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.isBack = false,
     this.title,
     this.centerTitle = true,
+    this.titleWidget,
+    this.actions,
   });
 
   final Color? backgroundColor;
   final bool isBack;
   final String? title;
+  final Widget? titleWidget;
   final bool centerTitle;
+  final List<Widget>? actions;
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -30,21 +35,19 @@ class _MyAppBarState extends State<MyAppBar> {
     return AppBar(
       backgroundColor: widget.backgroundColor,
       leading: widget.isBack
-          ? Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: GestureDetector(
-                onTap: () {
-                  context.pop();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_outlined,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+          ? GestureDetector(
+              onTap: () {
+                context.pop();
+              },
+              child: MyContainer(
+                margin: EdgeInsets.only(top: 2, left: 12),
+                padding: EdgeInsets.all(8),
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.surface,
+                noBorder: true,
+                child: Icon(
+                  Icons.arrow_back_outlined,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             )
@@ -52,9 +55,11 @@ class _MyAppBarState extends State<MyAppBar> {
 
       title: widget.title != null
           ? MyTitleText(text: widget.title ?? '')
-          : null,
+          : widget.titleWidget,
 
       centerTitle: widget.centerTitle,
+
+      actions: widget.actions,
     );
   }
 }

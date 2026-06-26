@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "444892180401",
+    "project_id": "chat-sphere-777bc",
+    "storage_bucket": "chat-sphere-777bc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444892180401:android:7ba744e685b2ce47661790",
+        "android_client_info": {
+          "package_name": "com.example.chat_sphere_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWEyNONqYIUXV_cN4V_NzAeY0BZ8hjm10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

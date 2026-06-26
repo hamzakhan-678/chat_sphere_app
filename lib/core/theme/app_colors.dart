@@ -10,7 +10,7 @@ class AppColors {
 
   static const Color textPrimaryDark = Color(0xFFEDF1F4);
   static const Color textSecondaryDark = Color(0xFF939CA6);
-  static final Color textHintDark = Color(0xFF939CA6).withValues(alpha: 0.3);
+  static final Color textHintDark = Color(0xFF939CA6).withValues(alpha: 0.4);
 
   static const Color dividerDark = Color(0xFF21252c);
 
@@ -18,8 +18,8 @@ class AppColors {
   static const Color primaryLt = Color(0xFF2e84ef);
 
   static const Color backgroundLt = Color(0xFFffffff);
-  static const Color surfaceLt = Color(0xFFE1EBFA);
-  static const Color surfaceBorderLt = Color(0xFF292c33);
+  static const Color surfaceLt = Color(0xFFf8fafd);
+  static const Color surfaceBorderLt = Color(0xFFe2e5e9);
 
   static const Color textPrimaryLt = Color(0xFF131922);
   static const Color textSecondaryLt = Color(0xFF939CA6);

@@ -1,3 +1,4 @@
+import 'package:chat_sphere_app/Features/Auth/Controllers/auth_controller.dart';
 import 'package:chat_sphere_app/core/router/app_routes.dart';
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/widgets/my_app_bar.dart';
@@ -6,6 +7,7 @@ import 'package:chat_sphere_app/core/widgets/my_text_field.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:chat_sphere_app/core/widgets/sized_box_spacers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -20,6 +22,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  final authController = Get.find<AuthController>();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -94,14 +98,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               heightSpace(AppDimensions.spacingLargest),
 
-              MyButton(
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    // TODO, SignUP Code
-                  }
-                  context.pushNamed(AppRoutes.verifyEmail);
-                },
-                label: 'Sign Up',
+              Obx(
+                () => MyButton(
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await authController
+                          .registerUser(
+                            fullName: fullNameController.text.trim(),
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                          )
+                          .then((value) {
+                            if (!mounted) return;
+                            context.pushNamed(AppRoutes.login);
+                          })
+                          .onError((error, stackTrace) {});
+                    }
+                  },
+                  isLoading: authController.isLoading.value,
+                  label: 'Sign Up',
+                ),
               ),
             ],
           ),

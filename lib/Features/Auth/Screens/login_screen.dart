@@ -1,3 +1,4 @@
+import 'package:chat_sphere_app/Features/Auth/Controllers/auth_controller.dart';
 import 'package:chat_sphere_app/core/router/app_routes.dart';
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/widgets/logo_widget.dart';
@@ -6,6 +7,7 @@ import 'package:chat_sphere_app/core/widgets/my_text_field.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:chat_sphere_app/core/widgets/sized_box_spacers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +20,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
+
+  final authController = Get.put(AuthController(), permanent: true);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -83,14 +87,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
               heightSpace(AppDimensions.spacingLargest),
 
-              MyButton(
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    // TODO, Login Code
-                  }
-                  context.pushNamed(AppRoutes.home);
-                },
-                label: 'Login',
+              Obx(
+                () => MyButton(
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await authController
+                          .loginUser(
+                            email: emailController.text.trim(),
+                            password: passController.text.trim(),
+                          )
+                          .then((value) {
+                            if (!mounted) return;
+                            context.goNamed(AppRoutes.home);
+                          })
+                          .onError((error, stackTrace) {});
+                    }
+                  },
+                  isLoading: authController.isLoading.value,
+                  label: 'Login',
+                ),
               ),
 
               heightSpace(AppDimensions.spacingSmall),
@@ -114,7 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: Divider(color: Theme.of(context).dividerColor),
+                    child: Divider(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
                   ),
                   widthSpaceResponsive(context, 0.04),
 
@@ -122,7 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   widthSpaceResponsive(context, 0.04),
                   Expanded(
-                    child: Divider(color: Theme.of(context).dividerColor),
+                    child: Divider(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
                   ),
                 ],
               ),
@@ -134,10 +153,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   // TODO, Continue with Google
                 },
                 backgroundColor: Theme.of(context).colorScheme.surface,
+
                 border: Border.all(
                   color: Theme.of(context).colorScheme.outline,
                 ),
-                label: 'Continue with Google',
+
+                labelWidget: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.login_outlined,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    widthSpace(AppDimensions.spacingSmallest),
+
+                    MyHeadingText(
+                      text: 'Continue With Google',
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ],
+                ),
                 labelColor: Theme.of(context).colorScheme.onSurface,
               ),
             ],

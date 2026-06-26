@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppDimensions {
-  static const EdgeInsets screenPadding = EdgeInsets.fromLTRB(16, 24, 16, 16);
+  static const EdgeInsets screenPadding = EdgeInsets.fromLTRB(16, 16, 16, 16);
   static const EdgeInsets innerWidgetPadding = EdgeInsets.all(12);
 
   static const double buttonHeight = 52;
   static const double inputHeight = 56;
-  static const double appBarHeight = 56;
+  static const double appBarHeight = 64;
   static const double bottomNavHeight = 64;
 
   static const double iconSm = 16, iconMd = 24, iconLg = 32;

@@ -1,8 +1,20 @@
+import 'package:chat_sphere_app/Features/Profile/Controllers/theme_controller.dart';
 import 'package:chat_sphere_app/core/router/router_config.dart';
 import 'package:chat_sphere_app/core/theme/app_theme.dart';
+import 'package:chat_sphere_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  Get.put(ThemeController());
+
   runApp(const MyApp());
 }
 
@@ -11,13 +23,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp.router(
+    final themeController = Get.find<ThemeController>();
+
+    return Obx(
+      () => MaterialApp.router(
         title: 'Chat Sphere',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
+        themeMode: themeController.isDarkMode.value
+            ? ThemeMode.dark
+            : ThemeMode.light,
         routerConfig: router,
       ),
     );

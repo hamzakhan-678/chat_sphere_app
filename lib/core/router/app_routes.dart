@@ -8,6 +8,9 @@ class AppRoutes {
 
   // Home
   static const String home = "/home";
+  static const String chatScreen = '/chat';
 
   // Profile
+  static const String profile = "/profile";
+
 }

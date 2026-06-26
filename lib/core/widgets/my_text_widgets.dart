@@ -35,7 +35,7 @@ class MyTitleText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         fontSize: fontSize ?? 22,
-        fontWeight: fontWeight ?? FontWeight.w700,
+        fontWeight: fontWeight ?? FontWeight.w800,
         color: color ?? Theme.of(context).colorScheme.onSurface,
         letterSpacing: letterSpacing,
         overflow: overflow,
@@ -82,7 +82,7 @@ class MyHeadingText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize ?? 16,
         fontWeight: fontWeight ?? FontWeight.w600,
-        color: color ?? Theme.of(context).colorScheme.onPrimary,
+        color: color ?? Theme.of(context).colorScheme.onSurface,
         letterSpacing: letterSpacing,
         overflow: overflow,
         decoration: decoration,
@@ -127,8 +127,8 @@ class MyBodyText extends StatelessWidget {
       textAlign: textAlign,
       style: TextStyle(
         fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.normal,
-        color: color ?? Theme.of(context).colorScheme.onSurfaceVariant,
+        fontWeight: fontWeight ?? FontWeight.w300,
+        color: color ?? Theme.of(context).colorScheme.onSurface,
         letterSpacing: letterSpacing,
         overflow: overflow,
         decoration: decoration,
@@ -172,9 +172,9 @@ class MyHintText extends StatelessWidget {
       maxLines: maxLines,
       textAlign: textAlign,
       style: TextStyle(
-        fontSize: fontSize ?? 12,
-        fontWeight: fontWeight ?? FontWeight.normal,
-        color: color ?? Theme.of(context).shadowColor,
+        fontSize: fontSize ?? 11,
+        fontWeight: fontWeight ?? FontWeight.w300,
+        color: color ?? Theme.of(context).colorScheme.onSurfaceVariant,
         letterSpacing: letterSpacing,
         overflow: overflow,
         decoration: decoration,

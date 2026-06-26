@@ -13,6 +13,8 @@ class MyButton extends StatefulWidget {
     this.border,
     this.label,
     this.labelColor,
+    this.isLoading = false,
+    this.labelWidget,
   });
 
   final void Function()? onTap;
@@ -23,6 +25,8 @@ class MyButton extends StatefulWidget {
   final BoxBorder? border;
   final String? label;
   final Color? labelColor;
+  final bool isLoading;
+  final Widget? labelWidget;
 
   @override
   State<MyButton> createState() => _MyButtonState();
@@ -46,12 +50,20 @@ class _MyButtonState extends State<MyButton> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            widget.label != null
+            widget.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  )
+                : widget.label != null
                 ? MyHeadingText(
                     text: widget.label ?? '',
-                    color: widget.labelColor,
+                    color:
+                        widget.labelColor ??
+                        Theme.of(context).colorScheme.onPrimary,
                   )
-                : SizedBox.shrink(),
+                : widget.labelWidget ?? SizedBox.shrink(),
           ],
         ),
       ),
