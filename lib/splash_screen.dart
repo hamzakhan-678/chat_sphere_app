@@ -27,11 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
     themeController.getCurrentThemeFromMemory();
 
     // Getting User from Cache
-    final user = authController.box.read(authController.currentUserKey);
+    final user = authController.box.read(authController.userKey);
 
     if (user != null) {
       debugPrint('Current User: $user');
       authController.userModel.value = UserModel.fromJson(user);
+
       if (!mounted) return;
       context.goNamed(AppRoutes.home);
     } else {
@@ -42,10 +43,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    super.initState();
+
     Future.delayed(const Duration(seconds: 2)).then((value) {
       myInit();
     });
-    super.initState();
   }
 
   @override
@@ -60,15 +62,15 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             LogoWidget(),
 
-            heightSpace(AppDimensions.spacingMedium),
+            height(AppDimensions.m),
 
             MyTitleText(text: 'ChatSphere'),
 
-            heightSpace(AppDimensions.spacingSmall),
+            height(AppDimensions.s),
 
             MyBodyText(text: 'Conversations, beautifully connected.'),
 
-            heightSpace(AppDimensions.spacingMedium),
+            height(AppDimensions.m),
 
             CircularProgressIndicator(
               color: Theme.of(context).colorScheme.primary,

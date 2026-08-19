@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppDimensions {
-  static const EdgeInsets screenPadding = EdgeInsets.fromLTRB(16, 16, 16, 16);
-  static const EdgeInsets innerWidgetPadding = EdgeInsets.all(12);
+  static const EdgeInsets scaffoldPadding = EdgeInsets.all(16);
+  static const EdgeInsets containerPadding = EdgeInsets.all(12);
 
   static const double buttonHeight = 52;
   static const double inputHeight = 56;
@@ -11,13 +11,12 @@ class AppDimensions {
 
   static const double iconSm = 16, iconMd = 24, iconLg = 32;
 
-  static const double spacingSmallest = 4;
-  static const double spacingSmall = 8;
-  static const double spacingMedium = 16;
-  static const double spacingLarge = 24;
-  static const double spacingLargest = 32;
+  static const double xs = 4;
+  static const double s = 8;
+  static const double m = 16;
+  static const double l = 24;
+  static const double xl = 32;
 
-  static final BorderRadius borderRadiusSmall = BorderRadius.circular(8);
-  static final BorderRadius borderRadiusMedium = BorderRadius.circular(12);
+  static final BorderRadius borderRadius = BorderRadius.circular(15);
   static final BorderRadius borderRadiusFull = BorderRadius.circular(100);
 }

@@ -38,11 +38,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: MyAppBar(isBack: true),
       body: SingleChildScrollView(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            heightSpace(AppDimensions.appBarHeight),
+            height(AppDimensions.appBarHeight),
             Center(
               child: MyContainer(
                 padding: EdgeInsets.all(16),
@@ -59,7 +59,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ),
 
-            heightSpace(AppDimensions.spacingSmall),
+            height(AppDimensions.s),
 
             Center(child: MyTitleText(text: 'Forgot Password?')),
 
@@ -76,7 +76,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ),
 
-            heightSpace(AppDimensions.spacingLarge),
+            height(AppDimensions.l),
 
             Form(
               key: _formKey,
@@ -85,7 +85,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 children: [
                   MyBodyText(text: 'Email'),
 
-                  heightSpace(AppDimensions.spacingSmallest),
+                  height(AppDimensions.xs),
                   MyTextField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -93,7 +93,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     prefixIconData: Icons.mail_outline_rounded,
                   ),
 
-                  heightSpace(AppDimensions.spacingLargest),
+                  height(AppDimensions.l),
 
                   Obx(
                     () => MyButton(
@@ -107,7 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             'Password reset link sent to your email.',
                           );
 
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           context.goNamed(AppRoutes.login);
                         } else {

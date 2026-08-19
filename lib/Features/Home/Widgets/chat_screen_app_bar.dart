@@ -79,7 +79,7 @@ class ChatScreenAppBar extends StatelessWidget {
                 maxLines: 1,
                 fontWeight: FontWeight.bold,
               ),
-              heightSpace(AppDimensions.spacingSmallest),
+              height(AppDimensions.s),
               MyHintText(
                 text: 'Online now',
                 maxLines: 1,

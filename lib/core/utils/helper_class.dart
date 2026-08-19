@@ -23,7 +23,7 @@ class HelperClass {
       builder: (context) {
         return SimpleDialog(
           backgroundColor: Theme.of(context).colorScheme.surface,
-          contentPadding: AppDimensions.innerWidgetPadding,
+          contentPadding: AppDimensions.containerPadding,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

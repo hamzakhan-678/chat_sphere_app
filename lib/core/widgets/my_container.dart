@@ -39,7 +39,7 @@ class _MyContainerState extends State<MyContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: widget.padding ?? AppDimensions.innerWidgetPadding,
+      padding: widget.padding ?? AppDimensions.containerPadding,
       margin: widget.margin,
       height: widget.height,
       width: widget.width,
@@ -52,7 +52,7 @@ class _MyContainerState extends State<MyContainer> {
                   Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: widget.shape == BoxShape.circle
             ? null
-            : widget.borderRadius ?? AppDimensions.borderRadiusMedium,
+            : widget.borderRadius ?? AppDimensions.borderRadius,
         image: widget.decorationImage,
         shape: widget.shape ?? BoxShape.rectangle,
       ),

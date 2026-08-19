@@ -23,14 +23,14 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     return Scaffold(
       appBar: MyAppBar(isBack: true),
       body: Padding(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: SizedBox(
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              heightSpace(AppDimensions.appBarHeight),
+              height(AppDimensions.appBarHeight),
 
               // Mail Icon -- Outer Container
               MyContainer(
@@ -65,7 +65,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
               ),
 
-              heightSpace(AppDimensions.spacingSmall),
+              height(AppDimensions.s),
 
               MyTitleText(text: 'Verify your email'),
 
@@ -90,7 +90,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 label: 'I\'ve verified - Refresh',
               ),
 
-              heightSpace(AppDimensions.spacingSmall),
+              height(AppDimensions.s),
 
               MyButton(
                 onTap: () {
@@ -109,7 +109,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
               ),
 
-              heightSpace(AppDimensions.spacingLarge),
+              height(AppDimensions.l),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -24,7 +24,7 @@ class MessageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppDimensions.innerWidgetPadding,
+      padding: AppDimensions.containerPadding,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,7 +55,7 @@ class MessageTile extends StatelessWidget {
             ],
           ),
 
-          widthSpace(AppDimensions.spacingSmall),
+          width(AppDimensions.s),
 
           Expanded(
             child: Center(

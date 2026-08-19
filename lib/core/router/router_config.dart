@@ -22,7 +22,7 @@ final router = GoRouter(
       path: '/login',
       name: AppRoutes.login,
       builder: (context, state) => LoginScreen(),
-    ),
+    ),    
 
     GoRoute(
       path: '/register',

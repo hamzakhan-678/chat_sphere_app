@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/widgets/my_container.dart';
 import 'package:flutter/material.dart';
 

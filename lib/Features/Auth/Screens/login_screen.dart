@@ -3,6 +3,7 @@ import 'package:chat_sphere_app/core/router/app_routes.dart';
 import 'package:chat_sphere_app/core/theme/app_dimensions.dart';
 import 'package:chat_sphere_app/core/widgets/logo_widget.dart';
 import 'package:chat_sphere_app/core/widgets/my_button.dart';
+import 'package:chat_sphere_app/core/widgets/my_custom_dialogs.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_field.dart';
 import 'package:chat_sphere_app/core/widgets/my_text_widgets.dart';
 import 'package:chat_sphere_app/core/widgets/sized_box_spacers.dart';
@@ -41,20 +42,20 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              heightSpace(AppDimensions.appBarHeight),
+              height(AppDimensions.appBarHeight),
 
               // Header
               Center(
                 child: Column(
                   children: [
                     LogoWidget(),
-                    heightSpace(AppDimensions.spacingMedium),
+                    height(AppDimensions.m),
 
                     MyTitleText(text: 'Welcome Back'),
                     MyBodyText(text: 'Sign In to continue to ChatSphere'),
@@ -62,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
 
-              heightSpace(AppDimensions.spacingLarge),
+              height(AppDimensions.l),
 
               MyBodyText(text: 'Email'),
-              heightSpace(AppDimensions.spacingSmallest),
+              height(AppDimensions.xs),
               MyTextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -73,10 +74,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 prefixIconData: Icons.mail_outline_rounded,
               ),
 
-              heightSpace(AppDimensions.spacingSmall),
+              height(AppDimensions.s),
 
               MyBodyText(text: 'Password'),
-              heightSpace(AppDimensions.spacingSmallest),
+              height(AppDimensions.xs),
               MyTextField(
                 controller: passController,
                 obscureText: true,
@@ -85,30 +86,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 prefixIconData: Icons.lock_outline_rounded,
               ),
 
-              heightSpace(AppDimensions.spacingLargest),
+              height(AppDimensions.l),
+              MyButton(
+                onTap: () async {
+                  if (_formKey.currentState!.validate()) {
+                    myLoadingDialog(context, title: 'Signing in...');
 
-              Obx(
-                () => MyButton(
-                  onTap: () async {
-                    if (_formKey.currentState!.validate()) {
+                    try {
                       await authController
                           .loginUser(
                             email: emailController.text.trim(),
                             password: passController.text.trim(),
                           )
                           .then((value) {
-                            if (!mounted) return;
+                            if (!context.mounted) return;
+                            context.pop();
                             context.goNamed(AppRoutes.home);
-                          })
-                          .onError((error, stackTrace) {});
+                          });
+                    } catch (e) {
+                      debugPrint('Error Signing in');
+                    } finally {
+                      if (context.mounted) {
+                        context.pop();
+                      }
                     }
-                  },
-                  isLoading: authController.isLoading.value,
-                  label: 'Login',
-                ),
+                  }
+                },
+                // isLoading: authController.isLoading.value,
+                label: 'Login',
               ),
 
-              heightSpace(AppDimensions.spacingSmall),
+              height(AppDimensions.s),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -125,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
 
-              heightSpace(AppDimensions.spacingMedium),
+              height(AppDimensions.m),
               Row(
                 children: [
                   Expanded(
@@ -146,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
 
-              heightSpace(AppDimensions.spacingMedium),
+              height(AppDimensions.m),
 
               MyButton(
                 onTap: () {
@@ -166,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Icons.login_outlined,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
-                    widthSpace(AppDimensions.spacingSmallest),
+                    width(AppDimensions.xs),
 
                     MyHeadingText(
                       text: 'Continue With Google',
@@ -182,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
 
       bottomNavigationBar: Padding(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

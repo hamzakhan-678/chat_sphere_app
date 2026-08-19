@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          widthSpace(AppDimensions.spacingSmall),
+          width(AppDimensions.s),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: GestureDetector(
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: Padding(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
               keyboardType: TextInputType.text,
             ),
 
-            heightSpace(AppDimensions.spacingMedium),
+            height(AppDimensions.m),
 
             Expanded(
               child: ListView.separated(
@@ -162,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 separatorBuilder: (context, index) {
-                  return heightSpace(AppDimensions.spacingSmallest);
+                  return height(AppDimensions.s);
                 },
               ),
             ),

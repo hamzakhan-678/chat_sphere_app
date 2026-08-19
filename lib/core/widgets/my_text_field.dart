@@ -30,6 +30,7 @@ class MyTextField extends StatefulWidget {
     this.noEnabledBorder = false,
     this.noDisabledBorder = false,
     this.noFocusedBorder = false,
+    this.validator,
   });
 
   final TextEditingController? controller;
@@ -47,10 +48,10 @@ class MyTextField extends StatefulWidget {
   final double? cursorHeight;
   final Color? cursorColor;
   final Color? cursorErrorColor;
+  final String? Function(String?)? validator;
   final bool readOnly;
   final bool? filled;
   final Color? fillColor;
-
   final bool noBorder;
   final InputBorder? border;
   final bool noEnabledBorder;
@@ -86,6 +87,7 @@ class _MyTextFieldState extends State<MyTextField> {
         cursorHeight: widget.cursorHeight,
         cursorColor: widget.cursorColor,
         cursorErrorColor: widget.cursorErrorColor,
+        validator: widget.validator,
         style:
             widget.style ??
             TextStyle(

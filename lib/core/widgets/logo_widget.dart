@@ -16,7 +16,7 @@ class _LogoWidgetState extends State<LogoWidget> {
   @override
   Widget build(BuildContext context) {
     return MyContainer(
-      padding: AppDimensions.innerWidgetPadding,
+      padding: AppDimensions.containerPadding,
       height: widget.size,
       width: widget.size,
       noBorder: true,

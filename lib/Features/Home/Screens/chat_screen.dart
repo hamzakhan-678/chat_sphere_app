@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: messagesList.length,
                       separatorBuilder: (context, index) {
-                        return heightSpace(AppDimensions.spacingSmall);
+                        return height(AppDimensions.s);
                       },
                       itemBuilder: (context, index) {
                         final message = messagesList[index];

@@ -34,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: MyAppBar(isBack: true, title: 'Profile', centerTitle: true),
       body: Padding(
-        padding: AppDimensions.screenPadding,
+        padding: AppDimensions.scaffoldPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            heightSpace(AppDimensions.spacingSmall),
+            height(AppDimensions.s),
 
             Center(
               child: Obx(
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            heightSpace(AppDimensions.spacingLarge),
+            height(AppDimensions.s),
 
             MyContainer(
               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 12),
@@ -148,14 +148,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label: 'Edit Profile',
             ),
 
-            heightSpace(AppDimensions.spacingSmall),
+            height(AppDimensions.s),
 
             Obx(
               () => MyButton(
                 onTap: () async {
                   final success = await authController.logoutUser();
                   if (success) {
-                    if (!mounted) return;
+                    if (!context.mounted) return;
                     context.goNamed(AppRoutes.login);
                   }
                 },
@@ -172,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Icon(Icons.logout_outlined, color: AppColors.error),
 
-                    widthSpace(AppDimensions.spacingSmallest),
+                    width(AppDimensions.s),
 
                     MyHeadingText(text: 'Logout', color: AppColors.error),
                   ],

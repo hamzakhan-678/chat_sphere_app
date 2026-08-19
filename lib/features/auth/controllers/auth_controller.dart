@@ -9,7 +9,7 @@ class AuthController extends GetxController {
   final _firebaseAuth = FirebaseAuth.instance;
   final dbRef = FirebaseDatabase.instance.ref();
   final box = GetStorage();
-  final String currentUserKey = 'currentUser';
+  final String userKey = 'currentUser';
 
   RxBool isLoading = false.obs;
   Rx<UserModel> userModel = UserModel().obs;
@@ -45,7 +45,7 @@ class AuthController extends GetxController {
                   .set(userModel.value.toJson());
 
               // Caching
-              box.write(currentUserKey, userModel.value.toJson());
+              box.write(userKey, userModel.value.toJson());
             }
           })
           .onError((error, stackTrace) {
@@ -63,40 +63,33 @@ class AuthController extends GetxController {
     required String email,
     required String password,
   }) async {
+    isLoading.value = true;
+
     try {
-      isLoading.value = true;
+      UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
 
-      await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((userCredential) async {
-            if (userCredential.user != null) {
-              // Saving user to database
-              DataSnapshot snapshot = await dbRef
-                  .child('Users/${userModel.value.id}')
-                  .get();
+      final uid = userCredential.user?.uid;
 
-              if (snapshot.exists) {
-                final data = snapshot.value as Map<dynamic, dynamic>;
+      if (uid == null) throw Exception('User data missing');
 
-                userModel.value = UserModel.fromJson(
-                  Map<String, dynamic>.from(data),
-                );
-                update();
+      DataSnapshot snapshot = await dbRef.child('Users').child(uid).get();
 
-                debugPrint('User Model: ${userModel.value}');
+      if (snapshot.exists) {
+        final data = Map<String, dynamic>.from(
+          snapshot.value as Map<dynamic, dynamic>,
+        );
 
-                // Caching
-                box.write(currentUserKey, userModel.value.toJson());
-              } else {
-                debugPrint('No User Found from Database');
-              }
-            }
-          })
-          .onError((error, stackTrace) {
-            debugPrint('Error: ${error.toString()}');
-            throw Exception(error);
-          });
-    } on Exception catch (e) {
+        userModel.value = UserModel.fromJson(data);
+        update();
+
+        debugPrint('User Model: ${userModel.value}');
+
+        await box.write(userKey, userModel.value.toJson());
+      } else {
+        throw Exception('No user found in the database');
+      }
+    } catch (e) {
       throw Exception(e);
     } finally {
       isLoading.value = false;
@@ -131,7 +124,7 @@ class AuthController extends GetxController {
 
       await _firebaseAuth.signOut();
 
-      await box.remove(currentUserKey);
+      await box.remove(userKey);
 
       userModel.value = UserModel();
       update();
